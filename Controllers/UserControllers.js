@@ -11,6 +11,5 @@ const signupUser = async(req, res)=>{
     const result = await usermodel.insertuser(req.body);
     helper.prepareResponse(res,result.status,result.msg,(result.status? 200: 400), result.data)
 
-
 }
 module.exports = {signupUser}

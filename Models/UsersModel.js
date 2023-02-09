@@ -50,6 +50,10 @@ const findoneuser = async (req, res) => {
 }
 const updateuser = async (req, res) => {
     try {
+        const errors = validationResult(req)
+    if(!errors.isEmpty()){
+         helper.prepareResponse(res,false,errors.array(),400)
+    }
         const { usertype, firstname, lastname, email, mobilenumber, password } = req.body
         const { user_id } = req.params
         const upuser = await db.sequelize.query("UPDATE Users SET User_Type = ?,First_Name =?,Last_Name =?,Email = ?,Mobile_Number = ?,Password = ? WHERE user_id = ? ", {
@@ -60,7 +64,7 @@ const updateuser = async (req, res) => {
         const newuser = await db.sequelize.query('select * from Users where user_id = ?', {
             type: QueryTypes.SELECT,
             replacements: [req.params.user_id],
-            logging: console.log
+            logging: console.log 
         })
         helper.prepareResponse(res, true, 'Success', 200, [{ newuser }])
     } catch (e) {

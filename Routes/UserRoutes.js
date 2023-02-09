@@ -12,7 +12,8 @@ check('password').isLength({ min: 6 }).withMessage('minimum 6 char')],userContro
 router.get('/alluser', usermodel.alluser)
 router.get('/:user_id', usermodel.findoneuser)
 router.delete('/:user_id',authocheck, usermodel.deleteuser)
-router.put('/:user_id', usermodel.updateuser)
+router.put('/:user_id',[check('email').isEmail().withMessage('must be vaild formt'),
+check('password').isLength({ min: 6 }).withMessage('minimum 6 char')], usermodel.updateuser)
 router.get('/loginuser/data', usermodel.store)
 router.post('/loginuser', usermodel.loginuser)
 
