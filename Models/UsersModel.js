@@ -46,6 +46,7 @@ const findoneuser = async (req, res) => {
         helper.prepareResponse(res, true, 'Success', 200, [{ userone }])
     } catch (e) {
         helper.prepareResponse(res, false, e.message, 400, [])
+        //hell deepak
     }
 }
 const updateuser = async (req, res) => {
